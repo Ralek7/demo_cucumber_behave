@@ -55,14 +55,17 @@ class ElementUtils:
 
     # ------------------------- Interacciones Básicas -------------------------
     def click_element(self, locator: tuple):
+        element = None
         try:
             element = self.wait_for_element_to_be_clickable(locator)
             self.highlight_element(element)
             ActionChains(self.driver).move_to_element(element).click().perform()
-        except TimeoutException:
-            print(f"Elemento no clickeable: {locator}")
+        except Exception as e:
+            print(f"Error al hacer clic en {locator}: {str(e)}")
+            raise
         finally:
-            self.unhighlight_element(element)
+            if element:
+                self.unhighlight_element(element)
 
     def send_text(self, locator: tuple, text: str):
         try:
