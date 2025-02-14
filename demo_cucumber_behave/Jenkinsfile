@@ -1,0 +1,20 @@
+pipeline {
+    agent any
+    stages {
+        stage('Clonar repositorio') {
+            steps {
+                git url: 'https://github.com/Ralek7/demo_cucumber_behave.git', branch: 'main'
+            }
+        }
+        stage('Instalar dependencias') {
+            steps {
+                sh 'pip install -r requirements.txt'
+            }
+        }
+        stage('Ejecutar pruebas') {
+            steps {
+                sh 'behave features/SavingsAndInvestments.feature'  # Ajusta la ruta según tu estructura
+            }
+        }
+    }
+}
