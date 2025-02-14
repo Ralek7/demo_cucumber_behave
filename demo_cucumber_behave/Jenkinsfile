@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Clonar repositorio') {
             steps {
-                git url: 'https://github.com/Ralek7/demo_cucumber_behave.git', branch: 'main'
+                git url: 'URL_DE_TU_REPOSITORIO.git', branch: 'main'
             }
         }
         stage('Instalar dependencias') {
@@ -13,8 +13,24 @@ pipeline {
         }
         stage('Ejecutar pruebas') {
             steps {
-                sh 'behave features/SavingsAndInvestments.feature'  # Ajusta la ruta según tu estructura
+                sh 'mkdir -p reports'  // Crear carpeta para los reportes
+                sh 'behave features/SavingsAndInvestments.feature --format pretty --format junit --out reports --format html --out reports/report.html'
             }
+        }
+    }
+    post {
+        always {
+            junit 'reports/*.xml'
+            publishHTML(
+                target: [
+                    allowMissing: false,
+                    alwaysLinkToLastBuild: true,
+                    keepAll: true,
+                    reportDir: 'reports',
+                    reportFiles: 'report.html',
+                    reportName: 'Reporte de Pruebas'
+                ]
+            )
         }
     }
 }
