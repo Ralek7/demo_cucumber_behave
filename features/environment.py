@@ -5,8 +5,8 @@ def before_scenario(context, scenario):
     # Configurar Chrome
     options = Options()
     options.add_argument("--start-maximized")
-    # options.add_argument("--headless")  # Opcional
-    context.driver = webdriver.Chrome(options=options)
+    options.add_argument("--headless")  # Opcional
+    context.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 
 def after_scenario(context, scenario):
     # Cerrar el navegador
