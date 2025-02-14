@@ -1,3 +1,4 @@
 behave
 selenium
 webdriver-manager
+behave-junit-formatter
