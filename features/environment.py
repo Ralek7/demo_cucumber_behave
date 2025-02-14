@@ -8,7 +8,6 @@ def before_scenario(context, scenario):
     options.add_argument("--start-maximized")
     options.add_argument("--headless")
     
-    # Configuración correcta para Selenium 4.10+
     context.driver = webdriver.Chrome(
         service=Service(ChromeDriverManager().install()),
         options=options
