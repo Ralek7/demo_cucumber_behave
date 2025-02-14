@@ -1,18 +1,19 @@
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
-from webdriver_manager.chrome import ChromeDriverManager  # Importar el manager
 
 def before_scenario(context, scenario):
     options = Options()
     options.add_argument("--start-maximized")
-    options.add_argument("--headless")  # Recomendado para CI
+    options.add_argument("--headless")
     
-    # Configurar Chrome con el driver automático
+    # Configuración correcta para Selenium 4.10+
     context.driver = webdriver.Chrome(
         service=Service(ChromeDriverManager().install()),
         options=options
     )
 
 def after_scenario(context, scenario):
-    if hasattr(context, 'driver'):  # Verificar si el driver existe
+    if hasattr(context, 'driver'):
         context.driver.quit()
