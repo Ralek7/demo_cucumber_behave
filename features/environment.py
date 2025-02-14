@@ -9,7 +9,7 @@ def before_scenario(context, scenario):
     
     # Configurar Chrome con el driver automático
     context.driver = webdriver.Chrome(
-        executable_path=ChromeDriverManager().install(),
+        service=Service(ChromeDriverManager().install()),
         options=options
     )
 
