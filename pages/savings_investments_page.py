@@ -44,6 +44,7 @@ class SavingsAndInvestmentsPage:
     def click_calcular(self):
         # self.utils.force_click_with_retry(self.calcular_btn)
         self.utils.click_element(self.calcular_btn)
+        time.sleep(1)
         self.utils.click_element(self.calcular_btn)
 
     def get_result(self):
