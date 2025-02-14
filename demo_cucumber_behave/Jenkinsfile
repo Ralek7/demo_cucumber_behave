@@ -14,7 +14,7 @@ pipeline {
         stage('Ejecutar pruebas') {
             steps {
                 sh 'mkdir -p reports'  // Crear carpeta para los reportes
-                sh 'behave features/SavingsAndInvestments.feature --format pretty --format junit --out reports --format html --out reports/report.html'
+                sh 'behave --no-capture features/SavingsAndInvestments.feature --format pretty --format junit --out reports --format html --out reports/report.html'
             }
         }
     }
